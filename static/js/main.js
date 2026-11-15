@@ -87,7 +87,7 @@
             // Close after tapping a navigation link on touch devices.
             sidebar.querySelectorAll('a[href]').forEach(function(link) {
                 link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) closeSidebar();
+                    if (window.innerWidth <= 1024) closeSidebar();
                 });
             });
 
@@ -103,7 +103,7 @@
         // Reset off-canvas state when the viewport grows to desktop size.
         var lastIsMobile = null;
         function handleViewportChange() {
-            var isMobile = window.innerWidth <= 768;
+            var isMobile = window.innerWidth <= 1024;
             if (lastIsMobile !== null && lastIsMobile !== isMobile && !isMobile) {
                 closeSidebar();
             }

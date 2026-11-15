@@ -3017,3 +3017,33 @@ input#detected_location { color: var(--text-muted); }
     .match-actions { flex-direction: column; align-items: stretch; }
     .match-actions .btn { width: 100%; }
 }
+
+/* Tablet navigation: keep labels available and use the same drawer as mobile. */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar {
+        width: min(var(--sidebar-width), 86vw);
+        max-width: 320px;
+        transform: translateX(-100%);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar .brand-text,
+    .sidebar .user-name,
+    .sidebar .user-role,
+    .sidebar .nav-section,
+    .sidebar-footer a span { display: block; }
+    .sidebar-nav a { justify-content: flex-start; padding: var(--space-3); gap: var(--space-3); }
+    .sidebar-nav a i { width: 20px; min-width: 20px; text-align: center; }
+    .sidebar-footer a { justify-content: flex-start; gap: var(--space-3); }
+    .sidebar-footer a i { width: 20px; min-width: 20px; text-align: center; }
+    .sidebar-brand { justify-content: flex-start; padding: var(--space-5); }
+    .sidebar-user { padding: var(--space-4); text-align: center; }
+    .sidebar.open ~ .sidebar-overlay,
+    .sidebar-overlay.active { display: block; }
+    .sidebar-toggle { display: flex; }
+    .navbar-auth { margin-left: 0; }
+    .navbar-auth .sidebar-toggle { display: inline-flex; }
+    .layout-with-sidebar > .main-area,
+    .layout-with-sidebar > div:not(.main-area):not(.sidebar):not(.sidebar-overlay) {
+        margin-left: 0;
+    }
+}
