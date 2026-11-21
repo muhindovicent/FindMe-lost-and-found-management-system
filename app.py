@@ -87,6 +87,10 @@ _NOTIFICATION_TYPE_ENUM = "ENUM('info','warning','success','match','recovery') D
 
 
 def _ensure_match_schema(db):
+    # The Neon schema is created by database/neon_schema.sql. The legacy
+    # MySQL runtime schema-repair queries are not valid on PostgreSQL.
+    if app.config.get('DB_BACKEND') == 'postgres':
+        return
     """Add missing review columns / enum values on older deployments.
 
     Runs at most once per worker. Failures are logged and retried on the next
