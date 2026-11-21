@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "https://findme-api-staging-jpfn.onrender.com/$1"
+    }
+  ]
+}
