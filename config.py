@@ -82,6 +82,9 @@ def _env(name, legacy=None, default=None):
 
 
 class Config:
+    DATABASE_URL = os.environ.get('DATABASE_URL', '')
+    DB_BACKEND = ('postgres' if DATABASE_URL.startswith(('postgresql://', 'postgres://')) else 'mysql')
+
     # ---- Secrets --------------------------------------------------------
     SECRET_KEY = os.environ.get('SECRET_KEY') or DEV_SECRET_KEY
     if is_production() and SECRET_KEY == DEV_SECRET_KEY:
