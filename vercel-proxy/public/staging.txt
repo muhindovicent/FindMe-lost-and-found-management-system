@@ -1,0 +1,1 @@
+FindMe staging edge routing. The Flask app is hosted on Render; Vercel proxies public requests.
