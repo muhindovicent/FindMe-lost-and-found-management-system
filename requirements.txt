@@ -14,3 +14,4 @@ whitenoise==6.8.2
 python-dotenv==1.0.1
 cloudinary==1.41.0
 cryptography
+psycopg[binary]>=3.2,<4
