@@ -586,6 +586,23 @@ def healthz():
     return 'ok', 200
 
 
+@app.route('/health/db')
+def database_health():
+    """Read-only database readiness check for staging (no credentials exposed)."""
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute('SELECT COUNT(*) FROM roles')
+        count = cursor.fetchone()[0]
+        cursor.close()
+        if count == 0:
+            return jsonify({'status': 'unavailable'}), 503
+        return jsonify({'status': 'ok', 'backend': app.config.get('DB_BACKEND')}), 200
+    except Exception:
+        logger.exception('Database readiness check failed')
+        return jsonify({'status': 'unavailable'}), 503
+
+
 @app.route('/login', methods=['GET', 'POST'])
 @limiter.limit('10/minute', methods=['POST'])
 def login():
