@@ -21,6 +21,10 @@ def _ssl_options():
 def get_db():
     """Get the database connection for this request (created on first use)."""
     if 'db' not in g:
+        if current_app.config.get('DB_BACKEND') == 'postgres':
+            from db_neon import connect_neon
+            g.db = connect_neon(current_app.config['DATABASE_URL'])
+            return g.db
         ssl_arg = _ssl_options()
         last_error = None
         for attempt in range(3):  # free DB/app may be waking from idle
